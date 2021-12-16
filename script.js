@@ -10,8 +10,9 @@ window.onload = () => {
 
    const createCard = (ideaObject) => {
       // const element0 = ` <div class="col py-3  "><div class="card animate__animated animate__tada bg-light border-0 shadow-md rounded" data-id="${ideaObject.id}"><div class="card-body"><h6 class="card-subtitle mb-2 text-muted"> ${ideaObject.title}</h6><p class="card-text">${ideaObject.idea}</p><div class="d-flex align-items-center justify-content-between"><a href="#" class="btn btn-secondary btn-sm fs-x-small">Approuver</a><a href="#" class="btn btn-outline-secondary btn-sm fs-x-small">Refuser</a></div></div></div></div>`
-      let classAdded = ""
+      let classAdded = "", btnStyle = "btn";
       if (ideaObject.evaluate === true) {
+         btnStyle = "text"
          if (ideaObject.status === "accepted") {
             classAdded = "border-success"
          } else if (ideaObject.status === "rejected") {
@@ -20,21 +21,20 @@ window.onload = () => {
       }
       const element =
          `<div class="col py-3">
-      <div class="card animate__animated animate__tada bg-light shadow-md rounded-3 border ${classAdded}" data-id="${ideaObject.id}">
-      <div class="card-body"><h6 class="card-subtitle mb-2 text-muted"> ${ideaObject.title}</h6>
-            <p class="card-text">${ideaObject.idea}</p>
-            <div class="d-flex align-items-center justify-content-between">
-               <btn  class="btn btn-success btn-sm accept-btn" id="accept-btn-${ideaObject.id}"  data-accept-id="${ideaObject.id}" title="accept button">
-                  <i class="fa fa-check-circle" aria-hidden="true"></i>
-               </btn>
-               <btn class="btn btn-danger btn-sm reject-btn" id="reject-btn-${ideaObject.id}" data-reject-id="${ideaObject.id}" title="reject button">
-                  <i class="fa fa-ban" aria-hidden="true"></i>
-               </btn>
+            <div class="card animate__animated animate__tada bg-light shadow-md rounded-3 border ${classAdded}" data-id="${ideaObject.id}">
+            <div class="card-body"><h6 class="card-subtitle mb-2 text-muted"> ${ideaObject.title}</h6>
+                  <p class="card-text">${ideaObject.idea}</p>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <button type="button"  class="btn ${btnStyle}-success btn-sm accept-btn" id="accept-btn-${ideaObject.id}"  data-accept-id="${ideaObject.id}" title="accept button">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                     </button>
+                     <button type="button" class="btn ${btnStyle}-danger btn-sm reject-btn" id="reject-btn-${ideaObject.id}" data-reject-id="${ideaObject.id}" title="reject button">
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                     </button>
+                  </div>
+               </div>
             </div>
-         </div>
-      </div>
-   </div>`;
-
+         </div>`;
       document.querySelector('#ideas_container').insertAdjacentHTML("beforeend", element);
    }
 
@@ -117,7 +117,7 @@ window.onload = () => {
                cardIdea.classList.remove("border-success")
                cardIdea.classList.add("border-danger")
                // element.classList.add('border border-danger')
-               
+
             });
          })
       })
@@ -126,9 +126,15 @@ window.onload = () => {
             const id = parseInt(element.dataset.acceptId)
             UpdateIdea(id, "accepted").then(response => response.json()).then(data => {
                let cardIdea = document.querySelector(`[data-id="${id}"]`);
-               console.log(cardIdea);
                cardIdea.classList.remove("border-danger")
                cardIdea.classList.add("border-success")
+
+
+               cardIdea.querySelector('.accept-btn').classList.remove("btn-success")
+               cardIdea.querySelector('.accept-btn').classList.add("text-success")
+               cardIdea.querySelector('.reject-btn').classList.remove("btn-danger")
+               cardIdea.querySelector('.reject-btn').classList.add("text-danger")
+
             });
 
          })
