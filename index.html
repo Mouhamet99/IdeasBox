@@ -13,51 +13,88 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
       integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- Font Awesome CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
    <!-- Custom CSS -->
    <link rel="stylesheet" href="./style.css">
    <title>Boite à idee</title>
 </head>
-<div class="container py-4">
-   <h1 class="text-center text-uppercase">🙋‍♂️✍Boites à Idees✍🙋‍♂️</h1>
-   <div class="row p-5 align-items-center flex-column-reverse flex-md-row">
-      <div class="col">
-         <!-- Form  -->
-         <form>
-            <div class="mb-3">
-               <label for="titre" class="form-label">Titre</label>
-               <input type="text" class="form-control" id="titre" name="titre" placeholder="Entrez votre titre">
-            </div>
-            <div class="mb-3">
-               <label for="proposition" class="form-label">Proposition</label>
-               <textarea class="form-control" id="proposition" name="proposition" rows="3"></textarea>
-               <p id="text-limit" class=" fs-x-small fw-bold py-2 text-end">
-                  Contenu saisi : <span id="text-progress">0</span>/130
-               </p>
-            </div>
-            <div class="col-auto text-end">
-               <button type="submit" class="btn btn-danger mb-3">Envoyer</button>
-            </div>
-         </form>
-      </div>
-      <div class="col">
-         <img src="./img/undraw_Working_re_ddwy.png" class="img-fluid" alt="">
-      </div>
-   </div>
-   <!-- Idead CSS -->
-   <div class="row">
-      <h4>Propositions</h4>
-   </div>
-   <div class="row row-cols-1 row-cols-md-3" id="ideas_container">
-   </div>
-</div>
 
 <body>
+   <!-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+   <div class="position-fixed top-0 end-0 p-3"data-bs-autohide="true" data-bs-delay="1000" style="z-index: 11">
+      <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+         <div class="toast-header">
+            <img src="" class="rounded me-2" alt="..."> 
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+         <div class="toast-body">
+            Hello, world! This is a toast message.
+         </div>
+      </div>
+   </div> -->
+
+   <div class="container py-4">
+      <h1 class="text-center text-uppercase">🙋‍♂️✍Boites à Idees✍🙋‍♂️</h1>
+      <div class="row p-5 align-items-center flex-column-reverse flex-md-row">
+         <div class="col">
+            <!-- Form  -->
+            <form>
+               <div class="mb-3">
+                  <label for="titre" class="form-label">Titre</label>
+                  <input type="text" class="form-control" id="titre" name="titre" placeholder="Entrez votre titre">
+               </div>
+               <div class="mb-3">
+                  <label for="proposition" class="form-label">Proposition</label>
+                  <textarea class="form-control" id="proposition" name="proposition" rows="3"></textarea>
+                  <p id="text-limit" class=" fs-x-small fw-bold py-2 text-end">
+                     Contenu saisi : <span id="text-progress">0</span>/130
+                  </p>
+               </div>
+               <div class="col-auto text-end">
+                  <button type="submit" class="btn btn-danger mb-3">Envoyer</button>
+               </div>
+            </form>
+         </div>
+         <div class="col">
+            <img src="./img/undraw_Working_re_ddwy.png" class="img-fluid" alt="">
+         </div>
+      </div>
+      <div class="row">
+         <div class="dropdown ms-auto">
+            <button class="btn btn-outline-danger dropdown-toggle" type="button" id="filter"
+               data-bs-toggle="dropdown" aria-expanded="false">
+               <i class="fa fa-filter" aria-hidden="true"></i>
+               Filtre
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="filter">
+               <li><a class="dropdown-item text-danger" href="#" data-status="all">Toutes</a></li>
+               <li><a class="dropdown-item" href="#" data-status="not yet evaluate">En attente</a></li>
+               <li><a class="dropdown-item" href="#" data-status="accepted">Approuvé(es)</a></li>
+               <li><a class="dropdown-item" href="#" data-status="rejected">Refusé(es)</a></li>
+            </ul>
+         </div>
+      </div>
+      <!-- Idead CSS -->
+      <div class="row">
+         <h4>Propositions</h4>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3" id="ideas_container">
+      </div>
+   </div>
+
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"></script>
 
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-   <script src="./script.js"></script>
+   <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> -->
+   <script type="module" src="./script.js" defer></script>
 </body>
 
 </html>
