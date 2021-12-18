@@ -88,9 +88,9 @@ window.onload = () => {
             classAdded = "border-danger";
          }
       }
-
+   
       let textNode = `
-         <div class="card animate__animated animate__tada bg-light shadow-md rounded-3 border ${classAdded}" data-id="${ideaObject.id}">
+         <div class="card animate__animated animate__backInLeft bg-light shadow-sm rounded-3 border ${classAdded}" data-id="${ideaObject.id}  data-evaluate="${ideaObject.evaluate}"  data-status="${ideaObject.status}">
             <div class="card-body">
                <h6 class="card-subtitle mb-2 text-muted"> ${ideaObject.title}</h6>
                <p class="card-text">${ideaObject.idea}</p>
@@ -111,7 +111,7 @@ window.onload = () => {
       const acceptBtn = element.querySelector('.accept-btn')
       const rejectBtn = element.querySelector('.reject-btn')
 
-      if(acceptBtn && rejectBtn) {
+      if (acceptBtn && rejectBtn) {
          rejectBtn.addEventListener("click", (e) => {
             UpdateIdea(ideaObject.id, "rejected")
                .then((response) => response.json())
@@ -197,4 +197,45 @@ window.onload = () => {
          indicator.classList.remove("text-danger");
       }
    });
+
+   /********************************/
+   /* Filter*/
+   /********************************/
+   const filterOptions = document.querySelectorAll(".dropdown-item");
+   let currentOption = 0;
+   filterOptions.forEach((filterOption, index) => {
+      filterOption.addEventListener('click', (e) => {
+         e.preventDefault();
+
+         filterOptions[currentOption].classList.remove('text-danger')
+         filterOptions[index].classList.add("text-danger")
+         currentOption = index
+         // filterOptions[currentOption].classList.add("text-danger")
+
+         console.log(filterOptions[index].classList);
+         console.log(e.target.dataset.status);
+         filterBy(e.target.dataset.status)
+         return false;
+
+      })
+
+   })
+   const filterBy = (status = "") => {
+      const cardsIdea = document.querySelectorAll(".card");
+      cardsIdea.forEach((element) => {
+         element.classList.remove("d-none")
+         element.parentElement.classList.remove("d-none")
+      })
+      if (status !== "all") {
+         cardsIdea.forEach((element) => {
+            if (element.dataset.status !== status) {
+               element.classList.add("d-none")
+               element.parentElement.classList.toggle("d-none")
+            }
+         })
+      }
+
+
+   }
+   // const propositionTitle = document.querySelector("#proposition");
 };
