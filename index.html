@@ -20,6 +20,9 @@
 
    <!-- Custom CSS -->
    <link rel="stylesheet" href="./style.css">
+   <!-- CHART JS -->
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js" integrity="sha256-D2tkh/3EROq+XuDEmgxOLW1oNxf0rLNlOwsPIUX+co4=" crossorigin="anonymous"></script>
+
    <title>Boite à idee</title>
 </head>
 
@@ -66,10 +69,21 @@
             <img src="./img/undraw_Working_re_ddwy.png" class="img-fluid" alt="">
          </div>
       </div>
+      <div class="row chart ">
+         <div class="col-md-5 col-lg-5 d-flex align-items-center">
+            <canvas id="myChart" width="200" height="200"></canvas>
+            <div class="percentage">
+
+               <span class="p-accepted" data-percent=""></span>
+               <span class="p-rejected" data-percent=""></span>
+               <span class="p-waiting" data-percent=""></span>
+            </div>
+         </div>
+      </div>
       <div class="row">
          <div class="dropdown ms-auto">
-            <button class="btn btn-outline-danger dropdown-toggle" type="button" id="filter"
-               data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-outline-danger dropdown-toggle" type="button" id="filter" data-bs-toggle="dropdown"
+               aria-expanded="false">
                <i class="fa fa-filter" aria-hidden="true"></i>
                Filtre
             </button>

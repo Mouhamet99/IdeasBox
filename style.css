@@ -1,9 +1,18 @@
 .fs-small {
    font-size: small;
 }
+
 .fs-x-small {
    font-size: x-small;
 }
+
 .btn-danger {
    background-color: #ce0033;
+}
+
+.card:hover {
+   transition: 0.4s;
+   -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+   -moz-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+   box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
 }
